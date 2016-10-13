@@ -10,7 +10,12 @@ public class FileUtil {
 	private static final String OUTPUT_DIRECTORY = "outputFileDir";
 	
 	public static Path getOutputFilePath() {
-		return Paths.get(PropertyUtil.getProperty(OUTPUT_DIRECTORY)).toAbsolutePath().normalize();
+		return Paths.get(new StringBuilder().append(getCurrentDirectory()).append(PropertyUtil.getProperty(OUTPUT_DIRECTORY))
+				.toString()).toAbsolutePath().normalize();
+	}
+	
+	public static String getCurrentDirectory() {
+		return System.getProperty("user.dir");
 	}
 	
 	public static String getOutputFileName(String key) {
